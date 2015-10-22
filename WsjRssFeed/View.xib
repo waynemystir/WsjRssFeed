@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController">
+            <connections>
+                <outlet property="BizL" destination="lx1-pp-Jnz" id="mWn-Xy-E8U"/>
+                <outlet property="headerScroller" destination="0SH-yL-dQy" id="B9t-3R-Ivt"/>
+                <outlet property="headersContainer" destination="qcs-DL-hZF" id="AZb-Lu-5Bp"/>
+                <outlet property="lifeL" destination="74J-M0-Awb" id="QZh-fV-LXo"/>
+                <outlet property="marketsL" destination="2TA-Hx-QdU" id="cm4-hz-qzq"/>
+                <outlet property="opinesL" destination="x1B-8n-qzP" id="zUj-h6-0Bl"/>
+                <outlet property="scroller" destination="PEh-fg-t5i" id="Qag-gI-dYd"/>
+                <outlet property="tablesContainer" destination="kHR-zN-unG" id="1l1-zW-Tgs"/>
+                <outlet property="tblcContainerCenterXConstr" destination="0As-1j-3mG" id="kT8-QZ-Ata"/>
+                <outlet property="techL" destination="I1a-Uc-zKp" id="Qd9-TC-QaE"/>
+                <outlet property="view" destination="iN0-l3-epB" id="DE3-Gb-Ouc"/>
+                <outlet property="worldL" destination="Dez-nk-sx6" id="xSp-4Y-f0b"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0SH-yL-dQy">
+                    <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qcs-DL-hZF">
+                            <rect key="frame" x="0.0" y="0.0" width="534" height="44"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="World" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dez-nk-sx6">
+                                    <rect key="frame" x="7" y="12" width="53" height="21"/>
+                                    <animations/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Opinions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x1B-8n-qzP">
+                                    <rect key="frame" x="74" y="12" width="75" height="21"/>
+                                    <animations/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Business" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lx1-pp-Jnz">
+                                    <rect key="frame" x="161" y="12" width="82" height="21"/>
+                                    <animations/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Markets" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2TA-Hx-QdU">
+                                    <rect key="frame" x="248" y="12" width="78" height="21"/>
+                                    <animations/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Technology" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1a-Uc-zKp">
+                                    <rect key="frame" x="335" y="11" width="104" height="21"/>
+                                    <animations/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lifestyle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="74J-M0-Awb">
+                                    <rect key="frame" x="449" y="12" width="72" height="21"/>
+                                    <animations/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <animations/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="534" id="9hI-64-yw5"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <animations/>
+                    <constraints>
+                        <constraint firstItem="qcs-DL-hZF" firstAttribute="leading" secondItem="0SH-yL-dQy" secondAttribute="leading" id="0xW-H9-Mox"/>
+                        <constraint firstAttribute="trailing" secondItem="qcs-DL-hZF" secondAttribute="trailing" constant="66" id="7hh-h5-sI5"/>
+                        <constraint firstItem="qcs-DL-hZF" firstAttribute="top" secondItem="0SH-yL-dQy" secondAttribute="top" id="hjd-an-82n"/>
+                        <constraint firstItem="qcs-DL-hZF" firstAttribute="centerY" secondItem="0SH-yL-dQy" secondAttribute="centerY" id="jJT-XY-7sz"/>
+                        <constraint firstAttribute="bottom" secondItem="qcs-DL-hZF" secondAttribute="bottom" id="uRx-Zz-EQH"/>
+                        <constraint firstAttribute="height" constant="44" id="yKC-7z-RZf"/>
+                    </constraints>
+                </scrollView>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" pagingEnabled="YES" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEh-fg-t5i">
+                    <rect key="frame" x="0.0" y="108" width="600" height="492"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kHR-zN-unG">
+                            <rect key="frame" x="0.0" y="0.0" width="600" height="492"/>
+                            <animations/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <animations/>
+                    <constraints>
+                        <constraint firstItem="kHR-zN-unG" firstAttribute="centerX" secondItem="PEh-fg-t5i" secondAttribute="centerX" id="0As-1j-3mG"/>
+                        <constraint firstAttribute="trailing" secondItem="kHR-zN-unG" secondAttribute="trailing" id="Dj5-sU-Nde"/>
+                        <constraint firstItem="kHR-zN-unG" firstAttribute="leading" secondItem="PEh-fg-t5i" secondAttribute="leading" id="Dwl-QB-8ck"/>
+                        <constraint firstAttribute="bottom" secondItem="kHR-zN-unG" secondAttribute="bottom" id="mDc-a6-nuj"/>
+                        <constraint firstItem="kHR-zN-unG" firstAttribute="centerY" secondItem="PEh-fg-t5i" secondAttribute="centerY" id="rLj-G2-PBf"/>
+                        <constraint firstItem="kHR-zN-unG" firstAttribute="top" secondItem="PEh-fg-t5i" secondAttribute="top" id="wpo-ka-xgV"/>
+                    </constraints>
+                </scrollView>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="PEh-fg-t5i" secondAttribute="trailing" id="2JN-sT-KlS"/>
+                <constraint firstItem="0SH-yL-dQy" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="64" id="2bp-4p-429"/>
+                <constraint firstItem="PEh-fg-t5i" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="2ro-SB-a1Y"/>
+                <constraint firstAttribute="bottom" secondItem="PEh-fg-t5i" secondAttribute="bottom" id="HFf-wA-DU5"/>
+                <constraint firstAttribute="trailing" secondItem="0SH-yL-dQy" secondAttribute="trailing" id="WbD-gM-22t"/>
+                <constraint firstItem="0SH-yL-dQy" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gWg-iz-y7u"/>
+                <constraint firstItem="PEh-fg-t5i" firstAttribute="top" secondItem="0SH-yL-dQy" secondAttribute="bottom" id="zOt-uu-han"/>
+            </constraints>
+        </view>
+    </objects>
+</document>
