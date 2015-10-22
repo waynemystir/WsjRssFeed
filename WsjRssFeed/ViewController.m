@@ -109,8 +109,10 @@
     
     self.worldL.backgroundColor = self.headerLblBgClr;
     
-    self.tvWorldNews.separatorStyle = self.tvOpinion.separatorStyle = self.tvBusiness.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tvWorldNews.separatorColor = self.tvOpinion.separatorColor = self.tvBusiness.separatorColor = [UIColor clearColor];
+    self.tvWorldNews.separatorStyle = self.tvOpinion.separatorStyle = self.tvBusiness.separatorStyle = self.tvMarkets.separatorStyle = self.tvTech.separatorStyle = self.tvLife.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tvWorldNews.separatorColor = self.tvOpinion.separatorColor = self.tvBusiness.separatorColor = self.tvMarkets.separatorColor = self.tvTech.separatorColor = self.tvLife.separatorColor = [UIColor clearColor];
+    
+    [self addTapGestures];
     
     [LoadWsjData loadWorldNews];
     [LoadWsjData loadOpinion];
@@ -122,6 +124,59 @@
 
 - (UIColor *)headerLblBgClr {
     return _headerLblBgClr ? : (_headerLblBgClr = [UIColor colorWithRed:0.79f green:0.79f blue:0.79f alpha:1.0f]);
+}
+
+#pragma mark Tap Gestures
+
+- (void)addTapGestures {
+    
+    UITapGestureRecognizer *tgrW = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickWorld)];
+    tgrW.numberOfTapsRequired = tgrW.numberOfTouchesRequired = 1;
+    [self.worldL addGestureRecognizer:tgrW];
+    
+    UITapGestureRecognizer *tgrO = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickOpines)];
+    tgrO.numberOfTapsRequired = tgrO.numberOfTouchesRequired = 1;
+    [self.opinesL addGestureRecognizer:tgrO];
+    
+    UITapGestureRecognizer *tgrB = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickBusiness)];
+    tgrB.numberOfTapsRequired = tgrB.numberOfTouchesRequired = 1;
+    [self.BizL addGestureRecognizer:tgrB];
+    
+    UITapGestureRecognizer *tgrM = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickMarkets)];
+    tgrM.numberOfTapsRequired = tgrM.numberOfTouchesRequired = 1;
+    [self.marketsL addGestureRecognizer:tgrM];
+    
+    UITapGestureRecognizer *tgrT = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickTech)];
+    tgrT.numberOfTapsRequired = tgrT.numberOfTouchesRequired = 1;
+    [self.techL addGestureRecognizer:tgrT];
+    
+    UITapGestureRecognizer *tgrL = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickLife)];
+    tgrL.numberOfTapsRequired = tgrL.numberOfTouchesRequired = 1;
+    [self.lifeL addGestureRecognizer:tgrL];
+}
+
+- (void)clickWorld {
+    [self.scroller scrollRectToVisible:self.tvWorldNews.frame animated:YES];
+}
+
+- (void)clickOpines {
+    [self.scroller scrollRectToVisible:self.tvOpinion.frame animated:YES];
+}
+
+- (void)clickBusiness {
+    [self.scroller scrollRectToVisible:self.tvBusiness.frame animated:YES];
+}
+
+- (void)clickMarkets {
+    [self.scroller scrollRectToVisible:self.tvMarkets.frame animated:YES];
+}
+
+- (void)clickTech {
+    [self.scroller scrollRectToVisible:self.tvTech.frame animated:YES];
+}
+
+- (void)clickLife {
+    [self.scroller scrollRectToVisible:self.tvLife.frame animated:YES];
 }
 
 #pragma mark LoadWsjDataDelegate methods

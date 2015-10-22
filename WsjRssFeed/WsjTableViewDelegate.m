@@ -9,6 +9,8 @@
 #import "WsjTableViewDelegate.h"
 #import "WsjTableViewCell.h"
 #import "WsjRssItem.h"
+#import "AppDelegate.h"
+#import "ArticleViewController.h"
 
 @implementation WsjTableViewDelegate
 
@@ -38,6 +40,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 88.0f;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    WsjRssItem *wri = self.tableViewData[indexPath.row];
+    AppDelegate *ad = [[UIApplication sharedApplication] delegate];
+    UINavigationController *nc = (UINavigationController *) ad.window.rootViewController;
+    ArticleViewController *avc = [[ArticleViewController alloc] initWithUrl:wri.urlString];
+    [nc pushViewController:avc animated:YES];
 }
 
 @end
