@@ -43,47 +43,72 @@ NSURL * urlRssFeed(NSString *feed) {
 }
 
 + (void)loadWorldNews {
-    [self dataTaskWithURL:urlRssFeed(kWorldNews) completionSelector:@selector(loadedWorldNews:)];
+    [self dataTaskWithURL:urlRssFeed(kWorldNews) completionSelector:@selector(loadedWorldNews:) dataType:WORLD];
 }
 
 + (void)loadOpinion {
-    [self dataTaskWithURL:urlRssFeed(kOpinion) completionSelector:@selector(loadedOpinion:)];
+    [self dataTaskWithURL:urlRssFeed(kOpinion) completionSelector:@selector(loadedOpinion:) dataType:OPINION];
 }
 
 + (void)loadBusiness {
-    [self dataTaskWithURL:urlRssFeed(kBusiness) completionSelector:@selector(loadedBusiness:)];
+    [self dataTaskWithURL:urlRssFeed(kBusiness) completionSelector:@selector(loadedBusiness:) dataType:BUSINESS];
 }
 
 + (void)loadMarkets {
-    [self dataTaskWithURL:urlRssFeed(kMarkets) completionSelector:@selector(loadedMarkets:)];
+    [self dataTaskWithURL:urlRssFeed(kMarkets) completionSelector:@selector(loadedMarkets:) dataType:MARKETS];
 }
 
 + (void)loadTech {
-    [self dataTaskWithURL:urlRssFeed(kTech) completionSelector:@selector(loadedTech:)];
+    [self dataTaskWithURL:urlRssFeed(kTech) completionSelector:@selector(loadedTech:) dataType:TECH];
 }
 
 + (void)loadLife {
-    [self dataTaskWithURL:urlRssFeed(kLife) completionSelector:@selector(loadedLife:)];
+    [self dataTaskWithURL:urlRssFeed(kLife) completionSelector:@selector(loadedLife:) dataType:LIFE];
 }
 
-+ (void)dataTaskWithURL:(NSURL *)url completionSelector:(SEL)selector {
++ (void)dataTaskWithURL:(NSURL *)url
+     completionSelector:(SEL)selector
+               dataType:(LOAD_DATA_TYPE)dataType {
+    
     __weak LoadWsjData *lwd = [self manager];
     
     [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        if (error || ((NSHTTPURLResponse *) response).statusCode != 200) {
+            SEL sel = nil;
+            switch (error.code) {
+                case NSURLErrorTimedOut:
+                    sel = @selector(requestTimedOut:);
+                    break;
+                    
+                case NSURLErrorNotConnectedToInternet:
+                    sel = @selector(requestFailedOffline:);
+                    break;
+                    
+                default:
+                    sel = @selector(requestFailed:);
+                    break;
+            }
+            
+            [lwd performDelegateSelector:sel withObject:[NSNumber numberWithInt:dataType]];
+            return;
+        }
         
         ParseWsjDocOperation *op = [[ParseWsjDocOperation alloc] initWithData:data];
         __weak ParseWsjDocOperation *wop = op;
         
         op.completionBlock = ^{
-            
-            if (lwd.wsjDelegate && [lwd.wsjDelegate respondsToSelector:selector])
-                [lwd.wsjDelegate performSelectorOnMainThread:selector withObject:wop.wsjItems waitUntilDone:NO];
-            
+            [lwd performDelegateSelector:selector withObject:wop.wsjItems];
         };
         
         [[self parseOperationQueue] addOperation:op];
         
     }] resume];
+}
+
+- (void)performDelegateSelector:(SEL)selector withObject:(NSObject *)parameter {
+    if (self.wsjDelegate && [self.wsjDelegate respondsToSelector:selector])
+        [self.wsjDelegate performSelectorOnMainThread:selector withObject:parameter waitUntilDone:NO];
 }
 
 @end

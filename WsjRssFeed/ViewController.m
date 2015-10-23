@@ -12,10 +12,21 @@
 
 @interface ViewController () <LoadWsjDataDelegate, UIScrollViewDelegate>
 
+#pragma mark Outlets
+
 @property (weak, nonatomic) IBOutlet UIScrollView *headerScroller;
 @property (weak, nonatomic) IBOutlet UIView *headersContainer;
 @property (weak, nonatomic) IBOutlet UIScrollView *scroller;
 @property (weak, nonatomic) IBOutlet UIView *tablesContainer;
+@property (weak, nonatomic) IBOutlet UILabel *worldL;
+@property (weak, nonatomic) IBOutlet UILabel *opinesL;
+@property (weak, nonatomic) IBOutlet UILabel *BizL;
+@property (weak, nonatomic) IBOutlet UILabel *marketsL;
+@property (weak, nonatomic) IBOutlet UILabel *techL;
+@property (weak, nonatomic) IBOutlet UILabel *lifeL;
+
+#pragma mark Table Views
+
 @property (nonatomic, strong) UITableView *tvWorldNews;
 @property (nonatomic, strong) UITableView *tvOpinion;
 @property (nonatomic, strong) UITableView *tvBusiness;
@@ -33,12 +44,6 @@
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tblcContainerCenterXConstr;
 
-@property (weak, nonatomic) IBOutlet UILabel *worldL;
-@property (weak, nonatomic) IBOutlet UILabel *opinesL;
-@property (weak, nonatomic) IBOutlet UILabel *BizL;
-@property (weak, nonatomic) IBOutlet UILabel *marketsL;
-@property (weak, nonatomic) IBOutlet UILabel *techL;
-@property (weak, nonatomic) IBOutlet UILabel *lifeL;
 
 @end
 
@@ -112,8 +117,6 @@
     self.tvWorldNews.separatorStyle = self.tvOpinion.separatorStyle = self.tvBusiness.separatorStyle = self.tvMarkets.separatorStyle = self.tvTech.separatorStyle = self.tvLife.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.tvWorldNews.separatorColor = self.tvOpinion.separatorColor = self.tvBusiness.separatorColor = self.tvMarkets.separatorColor = self.tvTech.separatorColor = self.tvLife.separatorColor = [UIColor clearColor];
     
-    [self addTapGestures];
-    
     [LoadWsjData loadWorldNews];
     [LoadWsjData loadOpinion];
     [LoadWsjData loadBusiness];
@@ -124,59 +127,6 @@
 
 - (UIColor *)headerLblBgClr {
     return _headerLblBgClr ? : (_headerLblBgClr = [UIColor colorWithRed:0.79f green:0.79f blue:0.79f alpha:1.0f]);
-}
-
-#pragma mark Tap Gestures
-
-- (void)addTapGestures {
-    
-    UITapGestureRecognizer *tgrW = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickWorld)];
-    tgrW.numberOfTapsRequired = tgrW.numberOfTouchesRequired = 1;
-    [self.worldL addGestureRecognizer:tgrW];
-    
-    UITapGestureRecognizer *tgrO = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickOpines)];
-    tgrO.numberOfTapsRequired = tgrO.numberOfTouchesRequired = 1;
-    [self.opinesL addGestureRecognizer:tgrO];
-    
-    UITapGestureRecognizer *tgrB = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickBusiness)];
-    tgrB.numberOfTapsRequired = tgrB.numberOfTouchesRequired = 1;
-    [self.BizL addGestureRecognizer:tgrB];
-    
-    UITapGestureRecognizer *tgrM = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickMarkets)];
-    tgrM.numberOfTapsRequired = tgrM.numberOfTouchesRequired = 1;
-    [self.marketsL addGestureRecognizer:tgrM];
-    
-    UITapGestureRecognizer *tgrT = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickTech)];
-    tgrT.numberOfTapsRequired = tgrT.numberOfTouchesRequired = 1;
-    [self.techL addGestureRecognizer:tgrT];
-    
-    UITapGestureRecognizer *tgrL = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(clickLife)];
-    tgrL.numberOfTapsRequired = tgrL.numberOfTouchesRequired = 1;
-    [self.lifeL addGestureRecognizer:tgrL];
-}
-
-- (void)clickWorld {
-    [self.scroller scrollRectToVisible:self.tvWorldNews.frame animated:YES];
-}
-
-- (void)clickOpines {
-    [self.scroller scrollRectToVisible:self.tvOpinion.frame animated:YES];
-}
-
-- (void)clickBusiness {
-    [self.scroller scrollRectToVisible:self.tvBusiness.frame animated:YES];
-}
-
-- (void)clickMarkets {
-    [self.scroller scrollRectToVisible:self.tvMarkets.frame animated:YES];
-}
-
-- (void)clickTech {
-    [self.scroller scrollRectToVisible:self.tvTech.frame animated:YES];
-}
-
-- (void)clickLife {
-    [self.scroller scrollRectToVisible:self.tvLife.frame animated:YES];
 }
 
 #pragma mark LoadWsjDataDelegate methods
@@ -209,6 +159,70 @@
 - (void)loadedLife:(NSArray *)wsjItems {
     self.lifeTvDelegate.tableViewData = wsjItems;
     [self.tvLife reloadData];
+}
+
+- (void)requestTimedOut:(NSNumber *)dataType {
+    [self displayFailMessage:[dataType intValue] message:@"The request timed out."];
+}
+
+- (void)requestFailedOffline:(NSNumber *)dataType {
+    [self displayFailMessage:[dataType intValue] message:@"Your device is not connected to the internet."];
+}
+
+- (void)requestFailed:(NSNumber *)dataType {
+    [self displayFailMessage:[dataType intValue] message:@"A problem occurred."];
+}
+
+- (void)displayFailMessage:(LOAD_DATA_TYPE)dataType message:(NSString *)message {
+    
+    UILabel *nl = [[UILabel alloc] init];
+    nl.numberOfLines = 0;
+    nl.lineBreakMode = NSLineBreakByWordWrapping;
+    nl.backgroundColor = [UIColor clearColor];
+    nl.textColor = [UIColor blackColor];
+    nl.textAlignment = NSTextAlignmentCenter;
+    switch (dataType) {
+        case WORLD: {
+            nl.frame = self.tvWorldNews.frame;
+            nl.text = [NSString stringWithFormat:@"%@\n\n%@", message, @"The World News could not be loaded"];
+            break;
+        }
+            
+        case OPINION: {
+            nl.frame = self.tvOpinion.frame;
+            nl.text = [NSString stringWithFormat:@"%@\n\n%@", message, @"The Opinions could not be loaded"];
+            break;
+        }
+            
+        case BUSINESS: {
+            nl.frame = self.tvBusiness.frame;
+            nl.text = [NSString stringWithFormat:@"%@\n\n%@", message, @"The Business News could not be loaded"];
+            break;
+        }
+            
+        case MARKETS: {
+            nl.frame = self.tvMarkets.frame;
+            nl.text = [NSString stringWithFormat:@"%@\n\n%@", message, @"The Markets News could not be loaded"];
+            break;
+        }
+            
+        case TECH: {
+            nl.frame = self.tvTech.frame;
+            nl.text = [NSString stringWithFormat:@"%@\n\n%@", message, @"The Technology News could not be loaded"];
+            break;
+        }
+            
+        case LIFE: {
+            nl.frame = self.tvLife.frame;
+            nl.text = [NSString stringWithFormat:@"%@\n\n%@", message, @"The Lifestyle News could not be loaded"];
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
+    [self.tablesContainer addSubview:nl];
 }
 
 #pragma mark Scroll View Delegate methods
@@ -246,16 +260,43 @@
             break;
             
         default:
+            sl = self.worldL;
             break;
     }
     
     [self.headerScroller scrollRectToVisible:sl.frame animated:YES];
-    [self returnHeaderLabelBackGroundColor];
+    [self restoreHeaderLabelBackGroundColor];
     sl.backgroundColor = [self headerLblBgClr];
 }
 
-- (void)returnHeaderLabelBackGroundColor {
+- (void)restoreHeaderLabelBackGroundColor {
     self.worldL.backgroundColor = self.opinesL.backgroundColor = self.BizL.backgroundColor = self.marketsL.backgroundColor = self.techL.backgroundColor = self.lifeL.backgroundColor = [UIColor clearColor];
+}
+
+#pragma mark Tap Gestures
+
+- (IBAction)tapWorld:(id)sender {
+    [self.scroller scrollRectToVisible:self.tvWorldNews.frame animated:YES];
+}
+
+- (IBAction)tapOpinion:(id)sender {
+    [self.scroller scrollRectToVisible:self.tvOpinion.frame animated:YES];
+}
+
+- (IBAction)tapBusiness:(id)sender {
+    [self.scroller scrollRectToVisible:self.tvBusiness.frame animated:YES];
+}
+
+- (IBAction)tapMarkets:(id)sender {
+    [self.scroller scrollRectToVisible:self.tvMarkets.frame animated:YES];
+}
+
+- (IBAction)tapTech:(id)sender {
+    [self.scroller scrollRectToVisible:self.tvTech.frame animated:YES];
+}
+
+- (IBAction)tapLife:(id)sender {
+    [self.scroller scrollRectToVisible:self.tvLife.frame animated:YES];
 }
 
 @end

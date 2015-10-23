@@ -8,6 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+typedef NS_ENUM(NSInteger, LOAD_DATA_TYPE) {
+    WORLD = 0,
+    OPINION = 1,
+    BUSINESS = 2,
+    MARKETS = 3,
+    TECH = 4,
+    LIFE = 5
+};
+
 @protocol LoadWsjDataDelegate <NSObject>
 
 @required
@@ -18,6 +27,9 @@
 - (void)loadedMarkets:(NSArray *)wsjItems;
 - (void)loadedTech:(NSArray *)wsjItems;
 - (void)loadedLife:(NSArray *)wsjItems;
+- (void)requestTimedOut:(NSNumber *)dataType;
+- (void)requestFailedOffline:(NSNumber *)dataType;
+- (void)requestFailed:(NSNumber *)dataType;
 
 @end
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="8191" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15A284" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController">
@@ -35,44 +35,68 @@
                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="World" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dez-nk-sx6">
                                     <rect key="frame" x="7" y="12" width="53" height="21"/>
                                     <animations/>
+                                    <gestureRecognizers/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="GWE-b1-Yrb" appends="YES" id="ptQ-gO-X1y"/>
+                                    </connections>
                                 </label>
                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Opinions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x1B-8n-qzP">
                                     <rect key="frame" x="74" y="12" width="75" height="21"/>
                                     <animations/>
+                                    <gestureRecognizers/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="Eqf-ye-dUD" appends="YES" id="u8c-Dy-cpO"/>
+                                    </connections>
                                 </label>
                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Business" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lx1-pp-Jnz">
                                     <rect key="frame" x="161" y="12" width="82" height="21"/>
                                     <animations/>
+                                    <gestureRecognizers/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="7qV-8J-G8X" appends="YES" id="rCf-J9-x5M"/>
+                                    </connections>
                                 </label>
                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Markets" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2TA-Hx-QdU">
                                     <rect key="frame" x="248" y="12" width="78" height="21"/>
                                     <animations/>
+                                    <gestureRecognizers/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="vLT-m2-nQs" appends="YES" id="MKv-3L-oTe"/>
+                                    </connections>
                                 </label>
                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Technology" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1a-Uc-zKp">
                                     <rect key="frame" x="335" y="11" width="104" height="21"/>
                                     <animations/>
+                                    <gestureRecognizers/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="n4s-9s-zeM" appends="YES" id="51R-B8-nyf"/>
+                                    </connections>
                                 </label>
                                 <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lifestyle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="74J-M0-Awb">
                                     <rect key="frame" x="449" y="12" width="72" height="21"/>
                                     <animations/>
+                                    <gestureRecognizers/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
+                                    <connections>
+                                        <outletCollection property="gestureRecognizers" destination="EGz-kV-aAp" appends="YES" id="jq8-6O-zeg"/>
+                                    </connections>
                                 </label>
                             </subviews>
                             <animations/>
@@ -124,5 +148,35 @@
                 <constraint firstItem="PEh-fg-t5i" firstAttribute="top" secondItem="0SH-yL-dQy" secondAttribute="bottom" id="zOt-uu-han"/>
             </constraints>
         </view>
+        <tapGestureRecognizer id="GWE-b1-Yrb">
+            <connections>
+                <action selector="tapWorld:" destination="-1" id="gYE-Ku-q1Z"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="Eqf-ye-dUD">
+            <connections>
+                <action selector="tapOpinion:" destination="-1" id="ZqZ-Rv-gpb"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="7qV-8J-G8X">
+            <connections>
+                <action selector="tapBusiness:" destination="-1" id="ov7-Yd-9er"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="vLT-m2-nQs">
+            <connections>
+                <action selector="tapMarkets:" destination="-1" id="Ah8-Lz-jPE"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="n4s-9s-zeM">
+            <connections>
+                <action selector="tapTech:" destination="-1" id="Zsw-4I-5JC"/>
+            </connections>
+        </tapGestureRecognizer>
+        <tapGestureRecognizer id="EGz-kV-aAp">
+            <connections>
+                <action selector="tapLife:" destination="-1" id="2Mr-sn-Ide"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>
