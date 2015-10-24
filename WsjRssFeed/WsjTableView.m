@@ -50,7 +50,13 @@ NSUInteger const kWsjTblVwStartTag = 17000;
     WsjRssItem *wri = self.tableViewData[indexPath.row];
     cell.title.text = wri.title;
     cell.itemDescription.text = wri.itemDescription;
+    
     cell.itemImage.image = nil;
+    UIActivityIndicatorView *sp = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    sp.frame = cell.itemImage.frame;
+    [sp startAnimating];
+    [cell.itemImage addSubview:sp];
+    __weak typeof(self) ws = self;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -59,12 +65,23 @@ NSUInteger const kWsjTblVwStartTag = 17000;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             WsjTableViewCell *mc = [tableView cellForRowAtIndexPath:indexPath];
-            mc.itemImage.image = image;
+            [sp removeFromSuperview];
+            mc.itemImage.image = image ? : [[ws class] placeHolderImage];
         });
+        
         
     });
     
     return cell;
+}
+
++ (UIImage *)placeHolderImage {
+    static UIImage *_phi = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _phi = [UIImage imageNamed:@"charliebrown.jpg"];
+    });
+    return _phi;
 }
 
 #pragma mark UITableViewDelegate methods

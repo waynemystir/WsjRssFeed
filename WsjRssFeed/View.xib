@@ -7,18 +7,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController">
             <connections>
-                <outlet property="bizL" destination="lx1-pp-Jnz" id="e72-sL-EGh"/>
                 <outlet property="headerScroller" destination="0SH-yL-dQy" id="B9t-3R-Ivt"/>
                 <outlet property="headersContainer" destination="qcs-DL-hZF" id="AZb-Lu-5Bp"/>
-                <outlet property="lifeL" destination="74J-M0-Awb" id="QZh-fV-LXo"/>
-                <outlet property="marketsL" destination="2TA-Hx-QdU" id="cm4-hz-qzq"/>
-                <outlet property="opinesL" destination="x1B-8n-qzP" id="zUj-h6-0Bl"/>
                 <outlet property="scroller" destination="PEh-fg-t5i" id="Qag-gI-dYd"/>
                 <outlet property="tablesContainer" destination="kHR-zN-unG" id="1l1-zW-Tgs"/>
                 <outlet property="tblcContainerCenterXConstr" destination="0As-1j-3mG" id="kT8-QZ-Ata"/>
-                <outlet property="techL" destination="I1a-Uc-zKp" id="Qd9-TC-QaE"/>
                 <outlet property="view" destination="iN0-l3-epB" id="DE3-Gb-Ouc"/>
-                <outlet property="worldL" destination="Dez-nk-sx6" id="xSp-4Y-f0b"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -35,6 +29,7 @@
                                 <label opaque="NO" tag="19000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="World" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dez-nk-sx6">
                                     <rect key="frame" x="7" y="12" width="53" height="21"/>
                                     <animations/>
+                                    <color key="backgroundColor" red="0.78823529411764703" green="0.78823529411764703" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                                     <gestureRecognizers/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>

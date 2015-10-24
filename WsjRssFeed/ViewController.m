@@ -18,12 +18,6 @@
 @property (weak, nonatomic) IBOutlet UIView *headersContainer;
 @property (weak, nonatomic) IBOutlet UIScrollView *scroller;
 @property (weak, nonatomic) IBOutlet UIView *tablesContainer;
-@property (weak, nonatomic) IBOutlet UILabel *worldL;
-@property (weak, nonatomic) IBOutlet UILabel *opinesL;
-@property (weak, nonatomic) IBOutlet UILabel *bizL;
-@property (weak, nonatomic) IBOutlet UILabel *marketsL;
-@property (weak, nonatomic) IBOutlet UILabel *techL;
-@property (weak, nonatomic) IBOutlet UILabel *lifeL;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tblcContainerCenterXConstr;
 
 #pragma mark Various
@@ -37,9 +31,8 @@
 #pragma mark Lifecycle
 
 - (id)init {
-    if (self = [super initWithNibName:@"View" bundle:nil]) {
+    if (self = [super initWithNibName:@"View" bundle:nil])
         [LoadWsjData manager].wsjDelegate = self;
-    }
     return self;
 }
 
@@ -59,10 +52,7 @@
     self.tablesContainer.translatesAutoresizingMaskIntoConstraints = YES;
     self.tablesContainer.frame = CGRectMake(0, 0, sw * 6, sha);
     self.scroller.contentSize = CGSizeMake(sw * 6, sha);
-    
     self.scroller.delegate = self;
-    
-    self.worldL.backgroundColor = self.headerLblBgClr;
     
     [LoadWsjData loadWorldNews];
     [LoadWsjData loadOpinion];
@@ -118,7 +108,7 @@
     UILabel *sl = (UILabel *) [self.headersContainer viewWithTag:(19000 + currentPageNumber)];
     [self.headerScroller scrollRectToVisible:sl.frame animated:YES];
     
-    self.worldL.backgroundColor = self.opinesL.backgroundColor = self.bizL.backgroundColor = self.marketsL.backgroundColor = self.techL.backgroundColor = self.lifeL.backgroundColor = [UIColor clearColor];
+    [self.headersContainer.subviews makeObjectsPerformSelector:@selector(setBackgroundColor:) withObject:(id)[UIColor clearColor]];
     sl.backgroundColor = self.headerLblBgClr;
 }
 
