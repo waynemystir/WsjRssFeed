@@ -17,7 +17,7 @@ typedef NS_ENUM(NSInteger, LOAD_DATA_TYPE) {
     LIFE = 5
 };
 
-extern NSString * dataTypeName(LOAD_DATA_TYPE ldt);
+extern NSString * dataTypeName(LOAD_DATA_TYPE dataType);
 
 @protocol LoadWsjDataDelegate <NSObject>
 

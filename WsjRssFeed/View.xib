@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ViewController">
             <connections>
-                <outlet property="BizL" destination="lx1-pp-Jnz" id="mWn-Xy-E8U"/>
+                <outlet property="bizL" destination="lx1-pp-Jnz" id="e72-sL-EGh"/>
                 <outlet property="headerScroller" destination="0SH-yL-dQy" id="B9t-3R-Ivt"/>
                 <outlet property="headersContainer" destination="qcs-DL-hZF" id="AZb-Lu-5Bp"/>
                 <outlet property="lifeL" destination="74J-M0-Awb" id="QZh-fV-LXo"/>
@@ -32,7 +32,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qcs-DL-hZF">
                             <rect key="frame" x="0.0" y="0.0" width="534" height="44"/>
                             <subviews>
-                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="World" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dez-nk-sx6">
+                                <label opaque="NO" tag="19000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="World" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dez-nk-sx6">
                                     <rect key="frame" x="7" y="12" width="53" height="21"/>
                                     <animations/>
                                     <gestureRecognizers/>
@@ -43,7 +43,7 @@
                                         <outletCollection property="gestureRecognizers" destination="GWE-b1-Yrb" appends="YES" id="ptQ-gO-X1y"/>
                                     </connections>
                                 </label>
-                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Opinions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x1B-8n-qzP">
+                                <label opaque="NO" tag="19001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Opinions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="x1B-8n-qzP">
                                     <rect key="frame" x="74" y="12" width="75" height="21"/>
                                     <animations/>
                                     <gestureRecognizers/>
@@ -54,7 +54,7 @@
                                         <outletCollection property="gestureRecognizers" destination="Eqf-ye-dUD" appends="YES" id="u8c-Dy-cpO"/>
                                     </connections>
                                 </label>
-                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Business" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lx1-pp-Jnz">
+                                <label opaque="NO" tag="19002" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Business" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lx1-pp-Jnz">
                                     <rect key="frame" x="161" y="12" width="82" height="21"/>
                                     <animations/>
                                     <gestureRecognizers/>
@@ -65,7 +65,7 @@
                                         <outletCollection property="gestureRecognizers" destination="7qV-8J-G8X" appends="YES" id="rCf-J9-x5M"/>
                                     </connections>
                                 </label>
-                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Markets" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2TA-Hx-QdU">
+                                <label opaque="NO" tag="19003" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Markets" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2TA-Hx-QdU">
                                     <rect key="frame" x="248" y="12" width="78" height="21"/>
                                     <animations/>
                                     <gestureRecognizers/>
@@ -76,7 +76,7 @@
                                         <outletCollection property="gestureRecognizers" destination="vLT-m2-nQs" appends="YES" id="MKv-3L-oTe"/>
                                     </connections>
                                 </label>
-                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Technology" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1a-Uc-zKp">
+                                <label opaque="NO" tag="19004" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Technology" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I1a-Uc-zKp">
                                     <rect key="frame" x="335" y="11" width="104" height="21"/>
                                     <animations/>
                                     <gestureRecognizers/>
@@ -87,7 +87,7 @@
                                         <outletCollection property="gestureRecognizers" destination="n4s-9s-zeM" appends="YES" id="51R-B8-nyf"/>
                                     </connections>
                                 </label>
-                                <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lifestyle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="74J-M0-Awb">
+                                <label opaque="NO" tag="19005" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lifestyle" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="74J-M0-Awb">
                                     <rect key="frame" x="449" y="12" width="72" height="21"/>
                                     <animations/>
                                     <gestureRecognizers/>
@@ -150,32 +150,32 @@
         </view>
         <tapGestureRecognizer id="GWE-b1-Yrb">
             <connections>
-                <action selector="tapWorld:" destination="-1" id="gYE-Ku-q1Z"/>
+                <action selector="tapHeaderLbl:" destination="-1" id="2z1-cf-L6b"/>
             </connections>
         </tapGestureRecognizer>
         <tapGestureRecognizer id="Eqf-ye-dUD">
             <connections>
-                <action selector="tapOpinion:" destination="-1" id="ZqZ-Rv-gpb"/>
+                <action selector="tapHeaderLbl:" destination="-1" id="ZMI-bm-Ziv"/>
             </connections>
         </tapGestureRecognizer>
         <tapGestureRecognizer id="7qV-8J-G8X">
             <connections>
-                <action selector="tapBusiness:" destination="-1" id="ov7-Yd-9er"/>
+                <action selector="tapHeaderLbl:" destination="-1" id="44i-BO-3Ap"/>
             </connections>
         </tapGestureRecognizer>
         <tapGestureRecognizer id="vLT-m2-nQs">
             <connections>
-                <action selector="tapMarkets:" destination="-1" id="Ah8-Lz-jPE"/>
+                <action selector="tapHeaderLbl:" destination="-1" id="br9-Wp-BtT"/>
             </connections>
         </tapGestureRecognizer>
         <tapGestureRecognizer id="n4s-9s-zeM">
             <connections>
-                <action selector="tapTech:" destination="-1" id="Zsw-4I-5JC"/>
+                <action selector="tapHeaderLbl:" destination="-1" id="vhL-8e-MWJ"/>
             </connections>
         </tapGestureRecognizer>
         <tapGestureRecognizer id="EGz-kV-aAp">
             <connections>
-                <action selector="tapLife:" destination="-1" id="2Mr-sn-Ide"/>
+                <action selector="tapHeaderLbl:" destination="-1" id="RUj-qx-tEi"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

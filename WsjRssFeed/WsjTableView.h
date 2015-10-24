@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSUInteger const kWsjTblVwStartTag;
+
 @interface WsjTableView : UITableView <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSArray *tableViewData;

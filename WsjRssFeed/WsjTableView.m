@@ -13,16 +13,19 @@
 #import "ArticleViewController.h"
 #import "LoadWsjData.h"
 
+static NSString * const cellIdentifier = @"WsjTableViewCellId";
+NSUInteger const kWsjTblVwStartTag = 17000;
+
 @implementation WsjTableView
 
 + (WsjTableView *)tableViewFactory:(int)placement {
-    
     CGRect s = [[UIScreen mainScreen] bounds];
     CGFloat sw = s.size.width;
-    CGFloat sh = s.size.height;
-    CGFloat sha = sh - 108;
+    CGFloat sha = s.size.height - 108;
     
     WsjTableView *tv = [[WsjTableView alloc] initWithFrame:CGRectMake(sw * placement, 0, sw, sha)];
+    tv.tag = kWsjTblVwStartTag + placement;
+    [tv registerNib:[UINib nibWithNibName:@"WsjTableViewCell" bundle:nil] forCellReuseIdentifier:cellIdentifier];
     tv.dataSource = tv;
     tv.delegate = tv;
     tv.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -43,10 +46,11 @@
 }
 
 - (WsjTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    WsjTableViewCell *cell = [[NSBundle mainBundle] loadNibNamed:@"WsjTableViewCell" owner:nil options:nil].firstObject;
+    WsjTableViewCell *cell = (WsjTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     WsjRssItem *wri = self.tableViewData[indexPath.row];
     cell.title.text = wri.title;
     cell.itemDescription.text = wri.itemDescription;
+    cell.itemImage.image = nil;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -54,7 +58,8 @@
         UIImage *image = [UIImage imageWithData:data];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            cell.itemImage.image = image;
+            WsjTableViewCell *mc = [tableView cellForRowAtIndexPath:indexPath];
+            mc.itemImage.image = image;
         });
         
     });
