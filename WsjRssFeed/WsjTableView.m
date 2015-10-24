@@ -6,13 +6,37 @@
 //  Copyright © 2015 WES. All rights reserved.
 //
 
-#import "WsjTableViewDelegate.h"
+#import "WsjTableView.h"
 #import "WsjTableViewCell.h"
 #import "WsjRssItem.h"
 #import "AppDelegate.h"
 #import "ArticleViewController.h"
+#import "LoadWsjData.h"
 
-@implementation WsjTableViewDelegate
+@implementation WsjTableView
+
++ (WsjTableView *)tableViewFactory:(int)placement {
+    
+    CGRect s = [[UIScreen mainScreen] bounds];
+    CGFloat sw = s.size.width;
+    CGFloat sh = s.size.height;
+    CGFloat sha = sh - 108;
+    
+    WsjTableView *tv = [[WsjTableView alloc] initWithFrame:CGRectMake(sw * placement, 0, sw, sha)];
+    tv.dataSource = tv;
+    tv.delegate = tv;
+    tv.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tv.separatorColor = [UIColor clearColor];
+    
+    return tv;
+}
+
+- (void)setTableViewData:(NSArray *)tableViewData {
+    _tableViewData = tableViewData;
+    [self reloadData];
+}
+
+#pragma mark UITableViewDataSource methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.tableViewData.count;
@@ -37,6 +61,8 @@
     
     return cell;
 }
+
+#pragma mark UITableViewDelegate methods
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 88.0f;

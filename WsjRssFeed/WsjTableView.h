@@ -8,8 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WsjTableViewDelegate : NSObject <UITableViewDataSource, UITableViewDelegate>
+@interface WsjTableView : UITableView <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) NSArray *tableViewData;
+
++ (WsjTableView *)tableViewFactory:(int)placement;
 
 @end

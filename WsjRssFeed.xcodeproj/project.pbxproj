@@ -12,15 +12,15 @@
 		B00BBCE91BD848B8004BEB43 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B00BBCE81BD848B8004BEB43 /* ViewController.m */; };
 		B00BBCEE1BD848B8004BEB43 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B00BBCED1BD848B8004BEB43 /* Assets.xcassets */; };
 		B00BBCF11BD848B8004BEB43 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B00BBCEF1BD848B8004BEB43 /* LaunchScreen.storyboard */; };
-		B00BBCF91BD84A2E004BEB43 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = B00BBCF81BD84A2E004BEB43 /* View.xib */; settings = {ASSET_TAGS = (); }; };
-		B00BBCFC1BD84F65004BEB43 /* LoadWsjData.m in Sources */ = {isa = PBXBuildFile; fileRef = B00BBCFB1BD84F65004BEB43 /* LoadWsjData.m */; settings = {ASSET_TAGS = (); }; };
-		B00BBCFF1BD85F55004BEB43 /* WsjRssItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B00BBCFE1BD85F55004BEB43 /* WsjRssItem.m */; settings = {ASSET_TAGS = (); }; };
-		B00BBD021BD8631B004BEB43 /* ParseWsjDocOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B00BBD011BD8631B004BEB43 /* ParseWsjDocOperation.m */; settings = {ASSET_TAGS = (); }; };
-		B00BBD051BD88FC6004BEB43 /* WsjTableViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B00BBD041BD88FC6004BEB43 /* WsjTableViewDelegate.m */; settings = {ASSET_TAGS = (); }; };
-		B00BBD0B1BD894B4004BEB43 /* WsjTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B00BBD091BD894B4004BEB43 /* WsjTableViewCell.m */; settings = {ASSET_TAGS = (); }; };
-		B00BBD0C1BD894B4004BEB43 /* WsjTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B00BBD0A1BD894B4004BEB43 /* WsjTableViewCell.xib */; settings = {ASSET_TAGS = (); }; };
-		B051D4EF1BD8FA9F005197F9 /* ArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B051D4ED1BD8FA9F005197F9 /* ArticleViewController.m */; settings = {ASSET_TAGS = (); }; };
-		B051D4F01BD8FA9F005197F9 /* ArticleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B051D4EE1BD8FA9F005197F9 /* ArticleViewController.xib */; settings = {ASSET_TAGS = (); }; };
+		B00BBCF91BD84A2E004BEB43 /* View.xib in Resources */ = {isa = PBXBuildFile; fileRef = B00BBCF81BD84A2E004BEB43 /* View.xib */; };
+		B00BBCFC1BD84F65004BEB43 /* LoadWsjData.m in Sources */ = {isa = PBXBuildFile; fileRef = B00BBCFB1BD84F65004BEB43 /* LoadWsjData.m */; };
+		B00BBCFF1BD85F55004BEB43 /* WsjRssItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B00BBCFE1BD85F55004BEB43 /* WsjRssItem.m */; };
+		B00BBD021BD8631B004BEB43 /* ParseWsjDocOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B00BBD011BD8631B004BEB43 /* ParseWsjDocOperation.m */; };
+		B00BBD051BD88FC6004BEB43 /* WsjTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = B00BBD041BD88FC6004BEB43 /* WsjTableView.m */; };
+		B00BBD0B1BD894B4004BEB43 /* WsjTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B00BBD091BD894B4004BEB43 /* WsjTableViewCell.m */; };
+		B00BBD0C1BD894B4004BEB43 /* WsjTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B00BBD0A1BD894B4004BEB43 /* WsjTableViewCell.xib */; };
+		B051D4EF1BD8FA9F005197F9 /* ArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B051D4ED1BD8FA9F005197F9 /* ArticleViewController.m */; };
+		B051D4F01BD8FA9F005197F9 /* ArticleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B051D4EE1BD8FA9F005197F9 /* ArticleViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,8 +40,8 @@
 		B00BBCFE1BD85F55004BEB43 /* WsjRssItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WsjRssItem.m; sourceTree = "<group>"; };
 		B00BBD001BD8631B004BEB43 /* ParseWsjDocOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ParseWsjDocOperation.h; sourceTree = "<group>"; };
 		B00BBD011BD8631B004BEB43 /* ParseWsjDocOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ParseWsjDocOperation.m; sourceTree = "<group>"; };
-		B00BBD031BD88FC6004BEB43 /* WsjTableViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WsjTableViewDelegate.h; sourceTree = "<group>"; };
-		B00BBD041BD88FC6004BEB43 /* WsjTableViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WsjTableViewDelegate.m; sourceTree = "<group>"; };
+		B00BBD031BD88FC6004BEB43 /* WsjTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WsjTableView.h; sourceTree = "<group>"; };
+		B00BBD041BD88FC6004BEB43 /* WsjTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WsjTableView.m; sourceTree = "<group>"; };
 		B00BBD081BD894B4004BEB43 /* WsjTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WsjTableViewCell.h; sourceTree = "<group>"; };
 		B00BBD091BD894B4004BEB43 /* WsjTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WsjTableViewCell.m; sourceTree = "<group>"; };
 		B00BBD0A1BD894B4004BEB43 /* WsjTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WsjTableViewCell.xib; sourceTree = "<group>"; };
@@ -91,8 +91,8 @@
 				B00BBCFE1BD85F55004BEB43 /* WsjRssItem.m */,
 				B00BBD001BD8631B004BEB43 /* ParseWsjDocOperation.h */,
 				B00BBD011BD8631B004BEB43 /* ParseWsjDocOperation.m */,
-				B00BBD031BD88FC6004BEB43 /* WsjTableViewDelegate.h */,
-				B00BBD041BD88FC6004BEB43 /* WsjTableViewDelegate.m */,
+				B00BBD031BD88FC6004BEB43 /* WsjTableView.h */,
+				B00BBD041BD88FC6004BEB43 /* WsjTableView.m */,
 				B00BBD081BD894B4004BEB43 /* WsjTableViewCell.h */,
 				B00BBD091BD894B4004BEB43 /* WsjTableViewCell.m */,
 				B00BBD0A1BD894B4004BEB43 /* WsjTableViewCell.xib */,
@@ -191,7 +191,7 @@
 				B00BBCE61BD848B8004BEB43 /* AppDelegate.m in Sources */,
 				B051D4EF1BD8FA9F005197F9 /* ArticleViewController.m in Sources */,
 				B00BBCFC1BD84F65004BEB43 /* LoadWsjData.m in Sources */,
-				B00BBD051BD88FC6004BEB43 /* WsjTableViewDelegate.m in Sources */,
+				B00BBD051BD88FC6004BEB43 /* WsjTableView.m in Sources */,
 				B00BBD0B1BD894B4004BEB43 /* WsjTableViewCell.m in Sources */,
 				B00BBD021BD8631B004BEB43 /* ParseWsjDocOperation.m in Sources */,
 				B00BBCE31BD848B8004BEB43 /* main.m in Sources */,

@@ -21,6 +21,31 @@ NSURL * urlRssFeed(NSString *feed) {
     return [NSURL URLWithString:[NSString stringWithFormat:@"%@/%@", kBaseUrl, feed]];
 }
 
+NSString * dataTypeName(LOAD_DATA_TYPE dataType) {
+    switch (dataType) {
+        case WORLD:
+            return @"World News";
+            
+        case OPINION:
+            return @"Opinions";
+            
+        case BUSINESS:
+            return @"Business News";
+            
+        case MARKETS:
+            return @"Markets";
+            
+        case TECH:
+            return @"Technology News";
+            
+        case LIFE:
+            return @"Lifestyle Section";
+            
+        default:
+            break;
+    }
+}
+
 @implementation LoadWsjData
 
 + (LoadWsjData *)manager {
@@ -43,31 +68,30 @@ NSURL * urlRssFeed(NSString *feed) {
 }
 
 + (void)loadWorldNews {
-    [self dataTaskWithURL:urlRssFeed(kWorldNews) completionSelector:@selector(loadedWorldNews:) dataType:WORLD];
+    [self dataTaskWithURL:urlRssFeed(kWorldNews) dataType:WORLD];
 }
 
 + (void)loadOpinion {
-    [self dataTaskWithURL:urlRssFeed(kOpinion) completionSelector:@selector(loadedOpinion:) dataType:OPINION];
+    [self dataTaskWithURL:urlRssFeed(kOpinion) dataType:OPINION];
 }
 
 + (void)loadBusiness {
-    [self dataTaskWithURL:urlRssFeed(kBusiness) completionSelector:@selector(loadedBusiness:) dataType:BUSINESS];
+    [self dataTaskWithURL:urlRssFeed(kBusiness) dataType:BUSINESS];
 }
 
 + (void)loadMarkets {
-    [self dataTaskWithURL:urlRssFeed(kMarkets) completionSelector:@selector(loadedMarkets:) dataType:MARKETS];
+    [self dataTaskWithURL:urlRssFeed(kMarkets) dataType:MARKETS];
 }
 
 + (void)loadTech {
-    [self dataTaskWithURL:urlRssFeed(kTech) completionSelector:@selector(loadedTech:) dataType:TECH];
+    [self dataTaskWithURL:urlRssFeed(kTech) dataType:TECH];
 }
 
 + (void)loadLife {
-    [self dataTaskWithURL:urlRssFeed(kLife) completionSelector:@selector(loadedLife:) dataType:LIFE];
+    [self dataTaskWithURL:urlRssFeed(kLife) dataType:LIFE];
 }
 
 + (void)dataTaskWithURL:(NSURL *)url
-     completionSelector:(SEL)selector
                dataType:(LOAD_DATA_TYPE)dataType {
     
     __weak LoadWsjData *lwd = [self manager];
@@ -75,22 +99,29 @@ NSURL * urlRssFeed(NSString *feed) {
     [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
         if (error || ((NSHTTPURLResponse *) response).statusCode != 200) {
-            SEL sel = nil;
             switch (error.code) {
-                case NSURLErrorTimedOut:
-                    sel = @selector(requestTimedOut:);
+                case NSURLErrorTimedOut: {
+                    [lwd performDelegateSelector:@selector(requestTimedOut:) withBlock:^{
+                        [lwd.wsjDelegate requestTimedOut:dataType];
+                    }];
                     break;
+                }
                     
-                case NSURLErrorNotConnectedToInternet:
-                    sel = @selector(requestFailedOffline:);
+                case NSURLErrorNotConnectedToInternet: {
+                    [lwd performDelegateSelector:@selector(requestFailedOffline:) withBlock:^{
+                        [lwd.wsjDelegate requestFailedOffline:dataType];
+                    }];
                     break;
+                }
                     
-                default:
-                    sel = @selector(requestFailed:);
+                default: {
+                    [lwd performDelegateSelector:@selector(requestFailed:) withBlock:^{
+                        [lwd.wsjDelegate requestFailed:dataType];
+                    }];
                     break;
+                }
             }
             
-            [lwd performDelegateSelector:sel withObject:[NSNumber numberWithInt:dataType]];
             return;
         }
         
@@ -98,7 +129,10 @@ NSURL * urlRssFeed(NSString *feed) {
         __weak ParseWsjDocOperation *wop = op;
         
         op.completionBlock = ^{
-            [lwd performDelegateSelector:selector withObject:wop.wsjItems];
+            NSArray *wi = wop.wsjItems;
+            [lwd performDelegateSelector:@selector(loadedData:wsjItems:) withBlock:^{
+                [lwd.wsjDelegate loadedData:dataType wsjItems:wi];
+            }];
         };
         
         [[self parseOperationQueue] addOperation:op];
@@ -106,9 +140,9 @@ NSURL * urlRssFeed(NSString *feed) {
     }] resume];
 }
 
-- (void)performDelegateSelector:(SEL)selector withObject:(NSObject *)parameter {
+- (void)performDelegateSelector:(SEL)selector withBlock:(void (^)(void))aBlock {
     if (self.wsjDelegate && [self.wsjDelegate respondsToSelector:selector])
-        [self.wsjDelegate performSelectorOnMainThread:selector withObject:parameter waitUntilDone:NO];
+        [[NSOperationQueue mainQueue] addOperationWithBlock:aBlock];
 }
 
 @end

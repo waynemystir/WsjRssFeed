@@ -8,7 +8,7 @@
 
 #import "ViewController.h"
 #import "LoadWsjData.h"
-#import "WsjTableViewDelegate.h"
+#import "WsjTableView.h"
 
 @interface ViewController () <LoadWsjDataDelegate, UIScrollViewDelegate>
 
@@ -25,29 +25,17 @@
 @property (weak, nonatomic) IBOutlet UILabel *techL;
 @property (weak, nonatomic) IBOutlet UILabel *lifeL;
 
-#pragma mark Table Views
+#pragma mark Various
 
-@property (nonatomic, strong) UITableView *tvWorldNews;
-@property (nonatomic, strong) UITableView *tvOpinion;
-@property (nonatomic, strong) UITableView *tvBusiness;
-@property (nonatomic, strong) UITableView *tvMarkets;
-@property (nonatomic, strong) UITableView *tvTech;
-@property (nonatomic, strong) UITableView *tvLife;
-@property (nonatomic, strong) WsjTableViewDelegate *worldNewsTvDelegate;
-@property (nonatomic, strong) WsjTableViewDelegate *opinionTvDelegate;
-@property (nonatomic, strong) WsjTableViewDelegate *businessTvDelegate;
-@property (nonatomic, strong) WsjTableViewDelegate *marketsTvDelegate;
-@property (nonatomic, strong) WsjTableViewDelegate *techTvDelegate;
-@property (nonatomic, strong) WsjTableViewDelegate *lifeTvDelegate;
-
+@property (nonatomic, strong) NSArray *tableViews;
 @property (nonatomic, strong) UIColor *headerLblBgClr;
-
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *tblcContainerCenterXConstr;
-
 
 @end
 
 @implementation ViewController
+
+#pragma mark Lifecycle
 
 - (id)init {
     if (self = [super initWithNibName:@"View" bundle:nil]) {
@@ -62,60 +50,27 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
+    NSMutableArray *tvs = [@[] mutableCopy];
+    for (int j = 0; j < 6; j++) {
+        WsjTableView *tv = [WsjTableView tableViewFactory:j];
+        [self.tablesContainer addSubview:tv];
+        [tvs addObject:tv];
+    }
+    
+    self.tableViews = [tvs copy];
+    
     CGRect s = [[UIScreen mainScreen] bounds];
     CGFloat sw = s.size.width;
-    CGFloat sh = s.size.height;
-    CGFloat sha = sh - 108;    
-    
-    self.worldNewsTvDelegate = [WsjTableViewDelegate new];
-    self.tvWorldNews = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, sw, sha)];
-    self.tvWorldNews.dataSource = self.worldNewsTvDelegate;
-    self.tvWorldNews.delegate = self.worldNewsTvDelegate;
-    [self.tablesContainer addSubview:self.tvWorldNews];
-    
-    int pm = 1;
-    
-    self.opinionTvDelegate = [WsjTableViewDelegate new];
-    self.tvOpinion = [[UITableView alloc] initWithFrame:CGRectMake(sw * pm++, 0, sw, sha)];
-    self.tvOpinion.dataSource = self.opinionTvDelegate;
-    self.tvOpinion.delegate = self.opinionTvDelegate;
-    [self.tablesContainer addSubview:self.tvOpinion];
-    
-    self.businessTvDelegate = [WsjTableViewDelegate new];
-    self.tvBusiness = [[UITableView alloc] initWithFrame:CGRectMake(sw * pm++, 0, sw, sha)];
-    self.tvBusiness.dataSource = self.businessTvDelegate;
-    self.tvBusiness.delegate = self.businessTvDelegate;
-    [self.tablesContainer addSubview:self.tvBusiness];
-    
-    self.marketsTvDelegate = [WsjTableViewDelegate new];
-    self.tvMarkets = [[UITableView alloc] initWithFrame:CGRectMake(sw * pm++, 0, sw, sha)];
-    self.tvMarkets.dataSource = self.marketsTvDelegate;
-    self.tvMarkets.delegate = self.marketsTvDelegate;
-    [self.tablesContainer addSubview:self.tvMarkets];
-    
-    self.techTvDelegate = [WsjTableViewDelegate new];
-    self.tvTech = [[UITableView alloc] initWithFrame:CGRectMake(sw * pm++, 0, sw, sha)];
-    self.tvTech.dataSource = self.techTvDelegate;
-    self.tvTech.delegate = self.techTvDelegate;
-    [self.tablesContainer addSubview:self.tvTech];
-    
-    self.lifeTvDelegate = [WsjTableViewDelegate new];
-    self.tvLife = [[UITableView alloc] initWithFrame:CGRectMake(sw * pm++, 0, sw, sha)];
-    self.tvLife.dataSource = self.lifeTvDelegate;
-    self.tvLife.delegate = self.lifeTvDelegate;
-    [self.tablesContainer addSubview:self.tvLife];
+    CGFloat sha = s.size.height - 108;
     
     [self.scroller removeConstraint:self.tblcContainerCenterXConstr];
     self.tablesContainer.translatesAutoresizingMaskIntoConstraints = YES;
-    self.tablesContainer.frame = CGRectMake(0, 0, sw * pm, sha);
-    self.scroller.contentSize = CGSizeMake(sw * pm, sha);
+    self.tablesContainer.frame = CGRectMake(0, 0, sw * 6, sha);
+    self.scroller.contentSize = CGSizeMake(sw * 6, sha);
     
     self.scroller.delegate = self;
     
     self.worldL.backgroundColor = self.headerLblBgClr;
-    
-    self.tvWorldNews.separatorStyle = self.tvOpinion.separatorStyle = self.tvBusiness.separatorStyle = self.tvMarkets.separatorStyle = self.tvTech.separatorStyle = self.tvLife.separatorStyle = UITableViewCellSeparatorStyleNone;
-    self.tvWorldNews.separatorColor = self.tvOpinion.separatorColor = self.tvBusiness.separatorColor = self.tvMarkets.separatorColor = self.tvTech.separatorColor = self.tvLife.separatorColor = [UIColor clearColor];
     
     [LoadWsjData loadWorldNews];
     [LoadWsjData loadOpinion];
@@ -125,52 +80,33 @@
     [LoadWsjData loadLife];
 }
 
+#pragma mark Properties
+
+- (NSArray *)tableViews {
+    return _tableViews ? : (_tableViews = @[]);
+}
+
 - (UIColor *)headerLblBgClr {
     return _headerLblBgClr ? : (_headerLblBgClr = [UIColor colorWithRed:0.79f green:0.79f blue:0.79f alpha:1.0f]);
 }
 
 #pragma mark LoadWsjDataDelegate methods
 
-- (void)loadedWorldNews:(NSArray *)wsjItems {
-    self.worldNewsTvDelegate.tableViewData = wsjItems;
-    [self.tvWorldNews reloadData];
+- (void)loadedData:(LOAD_DATA_TYPE)dataType wsjItems:(NSArray *)wsjItems {
+    WsjTableView *tv = self.tableViews[dataType];
+    tv.tableViewData = wsjItems;
 }
 
-- (void)loadedOpinion:(NSArray *)wsjItems {
-    self.opinionTvDelegate.tableViewData = wsjItems;
-    [self.tvOpinion reloadData];
+- (void)requestTimedOut:(LOAD_DATA_TYPE)dataType {
+    [self displayFailMessage:dataType message:@"The request timed out."];
 }
 
-- (void)loadedBusiness:(NSArray *)wsjItems {
-    self.businessTvDelegate.tableViewData = wsjItems;
-    [self.tvBusiness reloadData];
+- (void)requestFailedOffline:(LOAD_DATA_TYPE)dataType {
+    [self displayFailMessage:dataType message:@"Your device is not connected to the internet."];
 }
 
-- (void)loadedMarkets:(NSArray *)wsjItems {
-    self.marketsTvDelegate.tableViewData = wsjItems;
-    [self.tvMarkets reloadData];
-}
-
-- (void)loadedTech:(NSArray *)wsjItems {
-    self.techTvDelegate.tableViewData = wsjItems;
-    [self.tvTech reloadData];
-}
-
-- (void)loadedLife:(NSArray *)wsjItems {
-    self.lifeTvDelegate.tableViewData = wsjItems;
-    [self.tvLife reloadData];
-}
-
-- (void)requestTimedOut:(NSNumber *)dataType {
-    [self displayFailMessage:[dataType intValue] message:@"The request timed out."];
-}
-
-- (void)requestFailedOffline:(NSNumber *)dataType {
-    [self displayFailMessage:[dataType intValue] message:@"Your device is not connected to the internet."];
-}
-
-- (void)requestFailed:(NSNumber *)dataType {
-    [self displayFailMessage:[dataType intValue] message:@"A problem occurred."];
+- (void)requestFailed:(LOAD_DATA_TYPE)dataType {
+    [self displayFailMessage:dataType message:@"A problem occurred."];
 }
 
 - (void)displayFailMessage:(LOAD_DATA_TYPE)dataType message:(NSString *)message {
@@ -181,46 +117,9 @@
     nl.backgroundColor = [UIColor clearColor];
     nl.textColor = [UIColor blackColor];
     nl.textAlignment = NSTextAlignmentCenter;
-    switch (dataType) {
-        case WORLD: {
-            nl.frame = self.tvWorldNews.frame;
-            nl.text = [NSString stringWithFormat:@"%@\n\n%@", message, @"The World News could not be loaded"];
-            break;
-        }
-            
-        case OPINION: {
-            nl.frame = self.tvOpinion.frame;
-            nl.text = [NSString stringWithFormat:@"%@\n\n%@", message, @"The Opinions could not be loaded"];
-            break;
-        }
-            
-        case BUSINESS: {
-            nl.frame = self.tvBusiness.frame;
-            nl.text = [NSString stringWithFormat:@"%@\n\n%@", message, @"The Business News could not be loaded"];
-            break;
-        }
-            
-        case MARKETS: {
-            nl.frame = self.tvMarkets.frame;
-            nl.text = [NSString stringWithFormat:@"%@\n\n%@", message, @"The Markets News could not be loaded"];
-            break;
-        }
-            
-        case TECH: {
-            nl.frame = self.tvTech.frame;
-            nl.text = [NSString stringWithFormat:@"%@\n\n%@", message, @"The Technology News could not be loaded"];
-            break;
-        }
-            
-        case LIFE: {
-            nl.frame = self.tvLife.frame;
-            nl.text = [NSString stringWithFormat:@"%@\n\n%@", message, @"The Lifestyle News could not be loaded"];
-            break;
-        }
-            
-        default:
-            break;
-    }
+    WsjTableView *tv = self.tableViews[dataType];
+    nl.frame = tv.frame;
+    nl.text = [NSString stringWithFormat:@"%@\n\nThe %@ could not be loaded.", message, dataTypeName(dataType)];
     
     [self.tablesContainer addSubview:nl];
 }
@@ -276,27 +175,33 @@
 #pragma mark Tap Gestures
 
 - (IBAction)tapWorld:(id)sender {
-    [self.scroller scrollRectToVisible:self.tvWorldNews.frame animated:YES];
+    WsjTableView *tv = self.tableViews[0];
+    [self.scroller scrollRectToVisible:tv.frame animated:YES];
 }
 
 - (IBAction)tapOpinion:(id)sender {
-    [self.scroller scrollRectToVisible:self.tvOpinion.frame animated:YES];
+    WsjTableView *tv = self.tableViews[1];
+    [self.scroller scrollRectToVisible:tv.frame animated:YES];
 }
 
 - (IBAction)tapBusiness:(id)sender {
-    [self.scroller scrollRectToVisible:self.tvBusiness.frame animated:YES];
+    WsjTableView *tv = self.tableViews[2];
+    [self.scroller scrollRectToVisible:tv.frame animated:YES];
 }
 
 - (IBAction)tapMarkets:(id)sender {
-    [self.scroller scrollRectToVisible:self.tvMarkets.frame animated:YES];
+    WsjTableView *tv = self.tableViews[3];
+    [self.scroller scrollRectToVisible:tv.frame animated:YES];
 }
 
 - (IBAction)tapTech:(id)sender {
-    [self.scroller scrollRectToVisible:self.tvTech.frame animated:YES];
+    WsjTableView *tv = self.tableViews[4];
+    [self.scroller scrollRectToVisible:tv.frame animated:YES];
 }
 
 - (IBAction)tapLife:(id)sender {
-    [self.scroller scrollRectToVisible:self.tvLife.frame animated:YES];
+    WsjTableView *tv = self.tableViews[5];
+    [self.scroller scrollRectToVisible:tv.frame animated:YES];
 }
 
 @end

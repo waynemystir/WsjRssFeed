@@ -17,19 +17,16 @@ typedef NS_ENUM(NSInteger, LOAD_DATA_TYPE) {
     LIFE = 5
 };
 
+extern NSString * dataTypeName(LOAD_DATA_TYPE ldt);
+
 @protocol LoadWsjDataDelegate <NSObject>
 
 @required
 
-- (void)loadedWorldNews:(NSArray *)wsjItems;
-- (void)loadedOpinion:(NSArray *)wsjItems;
-- (void)loadedBusiness:(NSArray *)wsjItems;
-- (void)loadedMarkets:(NSArray *)wsjItems;
-- (void)loadedTech:(NSArray *)wsjItems;
-- (void)loadedLife:(NSArray *)wsjItems;
-- (void)requestTimedOut:(NSNumber *)dataType;
-- (void)requestFailedOffline:(NSNumber *)dataType;
-- (void)requestFailed:(NSNumber *)dataType;
+- (void)loadedData:(LOAD_DATA_TYPE)dataType wsjItems:(NSArray *)wsjItems;
+- (void)requestTimedOut:(LOAD_DATA_TYPE)dataType;
+- (void)requestFailedOffline:(LOAD_DATA_TYPE)dataType;
+- (void)requestFailed:(LOAD_DATA_TYPE)dataType;
 
 @end
 
