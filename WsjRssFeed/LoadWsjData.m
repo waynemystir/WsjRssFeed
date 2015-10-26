@@ -91,48 +91,29 @@ NSString * dataTypeName(LOAD_DATA_TYPE dataType) {
     [self dataTaskWithURL:urlRssFeed(kLife) dataType:LIFE];
 }
 
-+ (void)dataTaskWithURL:(NSURL *)url
-               dataType:(LOAD_DATA_TYPE)dataType {
++ (void)dataTaskWithURL:(NSURL *)url dataType:(LOAD_DATA_TYPE)dataType {
     
-    __weak LoadWsjData *lwd = [self manager];
+    Class lwdClass = [self class];
     
     [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
-        if (error || ((NSHTTPURLResponse *) response).statusCode != 200) {
+        if (error || ((NSHTTPURLResponse *) response).statusCode != 200)
             switch (error.code) {
-                case NSURLErrorTimedOut: {
-                    [lwd performDelegateSelector:@selector(requestTimedOut:) withBlock:^{
-                        [lwd.wsjDelegate requestTimedOut:dataType];
-                    }];
-                    break;
-                }
+                case NSURLErrorTimedOut:
+                    return [lwdClass performDelegateSelector:@selector(requestTimedOut:) dataType:dataType parameter2:nil];
                     
-                case NSURLErrorNotConnectedToInternet: {
-                    [lwd performDelegateSelector:@selector(requestFailedOffline:) withBlock:^{
-                        [lwd.wsjDelegate requestFailedOffline:dataType];
-                    }];
-                    break;
-                }
+                case NSURLErrorNotConnectedToInternet:
+                    return [lwdClass performDelegateSelector:@selector(requestFailedOffline:) dataType:dataType parameter2:nil];
                     
-                default: {
-                    [lwd performDelegateSelector:@selector(requestFailed:) withBlock:^{
-                        [lwd.wsjDelegate requestFailed:dataType];
-                    }];
-                    break;
-                }
+                default:
+                    return [lwdClass performDelegateSelector:@selector(requestFailed:) dataType:dataType parameter2:nil];
             }
-            
-            return;
-        }
         
         ParseWsjDocOperation *op = [[ParseWsjDocOperation alloc] initWithData:data];
         __weak ParseWsjDocOperation *wop = op;
         
         op.completionBlock = ^{
-            NSArray *wi = wop.wsjItems;
-            [lwd performDelegateSelector:@selector(loadedData:wsjItems:) withBlock:^{
-                [lwd.wsjDelegate loadedData:dataType wsjItems:wi];
-            }];
+            [lwdClass performDelegateSelector:@selector(loadedData:wsjItems:) dataType:dataType parameter2:wop.wsjItems];
         };
         
         [[self parseOperationQueue] addOperation:op];
@@ -140,9 +121,21 @@ NSString * dataTypeName(LOAD_DATA_TYPE dataType) {
     }] resume];
 }
 
-- (void)performDelegateSelector:(SEL)selector withBlock:(void (^)(void))aBlock {
-    if (self.wsjDelegate && [self.wsjDelegate respondsToSelector:selector])
-        [[NSOperationQueue mainQueue] addOperationWithBlock:aBlock];
++ (void)performDelegateSelector:(SEL)selector dataType:(LOAD_DATA_TYPE)dataType parameter2:(id)parameter2 {
+    if (![[self manager].wsjDelegate respondsToSelector:selector])
+        return;
+    
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[[[self manager].wsjDelegate class] instanceMethodSignatureForSelector:selector]];
+    [invocation retainArguments];
+    invocation.target = [self manager].wsjDelegate;
+    invocation.selector = selector;
+    [invocation setArgument:&dataType atIndex:2];
+    if (parameter2)
+        [invocation setArgument:&parameter2 atIndex:3];
+    
+    [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+        [invocation invoke];
+    }];
 }
 
 @end

@@ -53,10 +53,10 @@ NSUInteger const kWsjTblVwStartTag = 17000;
     
     cell.itemImage.image = nil;
     UIActivityIndicatorView *sp = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    sp.frame = cell.itemImage.frame;
+    sp.frame = cell.itemImage.bounds;
     [sp startAnimating];
     [cell.itemImage addSubview:sp];
-    __weak typeof(self) ws = self;
+    Class wtvClass = self.class;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -64,11 +64,10 @@ NSUInteger const kWsjTblVwStartTag = 17000;
         UIImage *image = [UIImage imageWithData:data];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            WsjTableViewCell *mc = [tableView cellForRowAtIndexPath:indexPath];
             [sp removeFromSuperview];
-            mc.itemImage.image = image ? : [[ws class] placeHolderImage];
-        });
-        
+            WsjTableViewCell *mc = [tableView cellForRowAtIndexPath:indexPath];
+            mc.itemImage.image = image ? : [wtvClass placeHolderImage];
+        });        
         
     });
     
